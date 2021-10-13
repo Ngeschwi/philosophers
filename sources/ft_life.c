@@ -6,7 +6,7 @@
 /*   By: ngeschwi <nathan.geschwind@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 10:29:31 by ngeschwi          #+#    #+#             */
-/*   Updated: 2021/10/14 01:07:50 by ngeschwi         ###   ########.fr       */
+/*   Updated: 2021/10/14 01:11:48 by ngeschwi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	ft_sleep(t_philo *philo)
 {
 	ft_print(philo, "sleeping");
-	usleep(philo->data->time_to_spleep);
+	usleep(philo->data->time_to_spleep * 1000);
 }
 
 void	ft_eat(t_philo *philo)
@@ -37,7 +37,8 @@ void	ft_eat(t_philo *philo)
 		pthread_mutex_lock(&(philo)->mut_fork);
 	}
 	ft_print(philo, "eating");
-	usleep(philo->data->time_to_eat);
+	philo->eat_count++;
+	usleep(philo->data->time_to_eat * 1000);
 	if (philo->position % 2 == 0)
 	{
 		pthread_mutex_unlock(&(philo->data->philos[posi_on_right]).mut_fork);
@@ -59,7 +60,6 @@ void	*ft_life(void *philo_arg)
 	{
 		ft_eat(philo);
 		ft_sleep(philo);
-		philo->eat_count++;
 	}
 	return (SUCCES);
 }
