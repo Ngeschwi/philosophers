@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_error.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngeschwi <nathan.geschwind@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/02 11:13:04 by ngeschwi          #+#    #+#             */
-/*   Updated: 2021/10/08 14:16:29 by ngeschwi         ###   ########.fr       */
+/*   Created: 2021/10/06 12:29:09 by ngeschwi          #+#    #+#             */
+/*   Updated: 2021/10/14 00:37:03 by ngeschwi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_atoi(const char *str)
+int	ft_error(t_data *data, char *str)
 {
-	int		i;
-	int		total;
-	int		nbrless;
-
-	nbrless = 1;
-	i = 0;
-	total = 0;
-	if (str[i] == '-')
-		return (0);
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		total = total * 10 + (str[i] - '0');
-		i++;
-	}
-	if (str[i] != '\0')
-		return (0);
-	return (total * nbrless);
+	(void)data; // debug
+	printf("%s\n", str);
+	return (ERROR);
 }

@@ -1,34 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_print.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ngeschwi <nathan.geschwind@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/02 11:13:04 by ngeschwi          #+#    #+#             */
-/*   Updated: 2021/10/08 14:16:29 by ngeschwi         ###   ########.fr       */
+/*   Created: 2021/10/13 20:36:19 by ngeschwi          #+#    #+#             */
+/*   Updated: 2021/10/14 01:09:15 by ngeschwi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "philo.h"
+#include "../includes/philo.h"
 
-int	ft_atoi(const char *str)
+void	ft_print(t_philo *philo, char *str)
 {
-	int		i;
-	int		total;
-	int		nbrless;
+	unsigned long long	time;
 
-	nbrless = 1;
-	i = 0;
-	total = 0;
-	if (str[i] == '-')
-		return (0);
-	while (str[i] >= '0' && str[i] <= '9')
-	{
-		total = total * 10 + (str[i] - '0');
-		i++;
-	}
-	if (str[i] != '\0')
-		return (0);
-	return (total * nbrless);
+
+	pthread_mutex_lock(&(philo->data)->mut_print);
+	if (gettimeofday(&(philo)->tv_p, NULL) == -1)
+		printf("ERROR\n");
+	time = philo->tv_p.tv_usec - philo->data->time_start;
+	dprintf(1, "%llu Philo %d is %s\n", time, philo->position, str);
+	pthread_mutex_unlock(&(philo->data)->mut_print);
 }
