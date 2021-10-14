@@ -6,15 +6,15 @@
 /*   By: ngeschwi <nathan.geschwind@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 12:29:09 by ngeschwi          #+#    #+#             */
-/*   Updated: 2021/10/14 00:37:03 by ngeschwi         ###   ########.fr       */
+/*   Updated: 2021/10/14 19:43:29 by ngeschwi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_error(t_data *data, char *str)
+int	ft_error(char *str)
 {
-	(void)data; // debug
+	printf("ERROR\n");
 	printf("%s\n", str);
 	return (ERROR);
 }
