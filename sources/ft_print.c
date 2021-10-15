@@ -6,7 +6,7 @@
 /*   By: ngeschwi <nathan.geschwind@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 20:36:19 by ngeschwi          #+#    #+#             */
-/*   Updated: 2021/10/14 19:43:02 by ngeschwi         ###   ########.fr       */
+/*   Updated: 2021/10/15 14:40:16 by ngeschwi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	ft_print(t_philo *philo, char *str)
 {
 	unsigned long long	time;
 
-	pthread_mutex_lock(&(philo->data->mut_print));
 	gettimeofday(&(philo->tv_p), NULL);
+	pthread_mutex_lock(&(philo->data->mut_print));
 	time = ((philo->tv_p.tv_sec * 1000) + (philo->tv_p.tv_usec / 1000))
 		- philo->data->time_start;
 	if (str[0] == 'e')

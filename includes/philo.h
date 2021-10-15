@@ -6,7 +6,7 @@
 /*   By: ngeschwi <nathan.geschwind@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 10:59:14 by ngeschwi          #+#    #+#             */
-/*   Updated: 2021/10/14 20:05:14 by ngeschwi         ###   ########.fr       */
+/*   Updated: 2021/10/15 16:04:16 by ngeschwi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,12 +52,15 @@ typedef struct s_data
 # define SUCCESS 0
 # define EVEN 1
 # define ODD 0
+# define NOT_DEAD "dead"
+# define DEAD 0
 
 void	*ft_life(void *philo);
-void	ft_eat(t_philo *philo);
-void	ft_sleep(t_philo *philo);
-void	ft_think(t_philo *philo);
-void	ft_dead(t_philo *philo);
+void	*ft_eat(t_philo *philo);
+void	*ft_sleep(t_philo *philo);
+void	*ft_think(t_philo *philo);
+void	*ft_dead(t_philo *philo);
+int		ft_check_dead(t_philo *philo);
 void	*ft_end(t_data *data);
 void	ft_print(t_philo *philo, char *str);
 int		ft_error(char *str);

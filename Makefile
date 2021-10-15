@@ -6,7 +6,7 @@
 #    By: ngeschwi <nathan.geschwind@gmail.com>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/02 10:53:12 by ngeschwi          #+#    #+#              #
-#    Updated: 2021/10/14 17:49:00 by ngeschwi         ###   ########.fr        #
+#    Updated: 2021/10/15 14:55:19 by ngeschwi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ NAME	= philo
 
 CC		= gcc
 RM		= rm -rf
-CFLAGS	=  -g -g3  -Wall -Werror -Wextra #-fsanitize=address
+CFLAGS	=  -g -g3 -Wall -Werror -Wextra #-fsanitize=address
 LIBS	= -lpthread
 LINK	= -Iincludes
 

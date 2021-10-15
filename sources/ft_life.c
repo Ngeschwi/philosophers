@@ -6,7 +6,7 @@
 /*   By: ngeschwi <nathan.geschwind@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 10:29:31 by ngeschwi          #+#    #+#             */
-/*   Updated: 2021/10/14 20:18:57 by ngeschwi         ###   ########.fr       */
+/*   Updated: 2021/10/15 16:50:08 by ngeschwi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,17 @@ static int	ft_check_time(t_philo *philo)
 	}
 }
 
-void	ft_eat(t_philo *philo)
+void	*ft_eat(t_philo *philo)
 {
-	if (ft_check_time(philo) == ERROR)
-	{
-		ft_dead(philo);
-		usleep(50);
-	}
-	else
+	if (ft_check_dead(philo) == SUCCESS)
 	{
 		if (philo->position % 2 == 0)
 			ft_un_lock_mutex(philo, 0, EVEN);
 		else
 			ft_un_lock_mutex(philo, 0, ODD);
+		if (ft_check_time(philo) == ERROR)
+			return (ft_dead(philo));
+		ft_print(philo, "taking a fork");
 		ft_print(philo, "eating");
 		philo->eat_count++;
 		usleep(philo->data->time_to_eat * 1000);
@@ -76,8 +74,12 @@ void	ft_eat(t_philo *philo)
 			ft_un_lock_mutex(philo, 1, EVEN);
 		else
 			ft_un_lock_mutex(philo, 1, ODD);
-		ft_sleep(philo);
+		if (ft_sleep(philo) == DEAD)
+			return (DEAD);	
 	}
+	else
+		return (DEAD);
+	return (NOT_DEAD);
 }
 
 void	*ft_life(void *philo_arg)
@@ -86,13 +88,22 @@ void	*ft_life(void *philo_arg)
 
 	philo = philo_arg;
 	if (philo->data->nbr_time_philo_eat != -1)
+	{
 		while (philo->eat_count < philo->data->nbr_time_philo_eat)
-			ft_eat(philo);
+		{
+			if (ft_eat(philo) == DEAD)
+				return (DEAD);
+		}
+	}
 	else
+	{
 		while (1)
-			ft_eat(philo);
+		{
+			if (ft_eat(philo) == DEAD)
+				return (DEAD);
+		}
+	}
 	pthread_mutex_lock(&(philo->data->mut_die));
-	usleep(50);
 	philo->data->die = 1;
 	pthread_mutex_unlock(&(philo->data->mut_die));
 	return (SUCCESS);

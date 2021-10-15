@@ -6,7 +6,7 @@
 /*   By: ngeschwi <nathan.geschwind@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 11:01:09 by ngeschwi          #+#    #+#             */
-/*   Updated: 2021/10/14 20:01:08 by ngeschwi         ###   ########.fr       */
+/*   Updated: 2021/10/15 15:44:49 by ngeschwi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static int	ft_init_philo(t_data *data)
 	data->philos = malloc(sizeof(t_philo) * data->nbr_philo);
 	while (i < data->nbr_philo)
 	{
+		// data->philos[i] = philo;
 		memcpy(&(data->philos[i]), &philo, sizeof(t_philo));
 		data->philos[i].position = i;
 		data->philos[i].eat_count = 0;
