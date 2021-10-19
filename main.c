@@ -6,7 +6,7 @@
 /*   By: ngeschwi <nathan.geschwind@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 11:01:09 by ngeschwi          #+#    #+#             */
-/*   Updated: 2021/10/15 15:44:49 by ngeschwi         ###   ########.fr       */
+/*   Updated: 2021/10/19 20:39:07 by ngeschwi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,11 @@ static int	ft_init_philo(t_data *data)
 	data->philos = malloc(sizeof(t_philo) * data->nbr_philo);
 	while (i < data->nbr_philo)
 	{
-		// data->philos[i] = philo;
 		memcpy(&(data->philos[i]), &philo, sizeof(t_philo));
 		data->philos[i].position = i;
 		data->philos[i].eat_count = 0;
-		data->philos[i].time_when_eat = -1;
+		data->philos[i].time_when_eat = 0;
+		data->philos[i].die_p = 0;
 		data->philos[i].posi_fork = ft_calcul_posi_fork(&data->philos[i]);
 		pthread_mutex_init(&(data->philos[i].mut_fork), NULL);
 		if (pthread_create(&(data->philos[i].pt_philo), NULL, ft_life,
@@ -83,7 +83,7 @@ static int	ft_init_struct(t_data *data, int argc, char **argv)
 	if (ft_verif_struct(data) == ERROR)
 		return (ERROR);
 	pthread_mutex_init(&(data->mut_print), NULL);
-	pthread_mutex_init(&(data->mut_die), NULL);
+	// pthread_mutex_init(&(data->mut_die), NULL);
 	return (SUCCESS);
 }
 

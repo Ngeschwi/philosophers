@@ -6,13 +6,14 @@
 #    By: ngeschwi <nathan.geschwind@gmail.com>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/02 10:53:12 by ngeschwi          #+#    #+#              #
-#    Updated: 2021/10/15 14:55:19 by ngeschwi         ###   ########.fr        #
+#    Updated: 2021/10/19 16:17:25 by ngeschwi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRCS = main.c \
 		sources/ft_life.c \
 		sources/ft_life_2.c \
+		sources/ft_life_3.c \
 		sources/ft_print.c \
 		sources/ft_error.c \
 		sources/utils/ft_atoi.c
