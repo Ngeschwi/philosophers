@@ -6,7 +6,7 @@
 /*   By: ngeschwi <nathan.geschwind@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 20:36:19 by ngeschwi          #+#    #+#             */
-/*   Updated: 2021/10/19 20:46:45 by ngeschwi         ###   ########.fr       */
+/*   Updated: 2021/10/26 00:11:05 by ngeschwi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,26 @@
 
 void	ft_print(t_philo *philo, char *str, unsigned long long time)
 {
-	if (str[0] == 'd')
-		usleep(10);
-	if (str[0] == 'e')
-		philo->time_when_eat = time;
 	pthread_mutex_lock(&(philo->data->mut_print));
-	dprintf(1, "%llu Philo %d is %s\n", time, philo->position, str);
+	printf("%llu Philo %d is %s\n", time, philo->position, str);
+	if (philo->data->print_die == 0)
+	{
+		if (str[0] == 't' && str[1] == 'a')
+		{
+			philo->time_when_eat = time;
+			printf("%llu Philo %d is eating\n", time, philo->position);
+		}
+	}
 	pthread_mutex_unlock(&(philo->data->mut_print));
 }
 
 void	ft_print_dead(t_philo *philo, unsigned long long time)
 {
-	usleep(10);
 	pthread_mutex_lock(&(philo->data->mut_print));
-	dprintf(1, "%llu Philo %d is dead\n", time, philo->position);
+	if (philo->data->print_die == 0)
+	{
+		philo->data->print_die = 1;
+		printf("%llu Philo %d is dead\n", time, philo->position);
+	}
 	pthread_mutex_unlock(&(philo->data->mut_print));
 }

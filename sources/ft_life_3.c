@@ -6,7 +6,7 @@
 /*   By: ngeschwi <nathan.geschwind@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:13:40 by ngeschwi          #+#    #+#             */
-/*   Updated: 2021/10/19 20:57:04 by ngeschwi         ###   ########.fr       */
+/*   Updated: 2021/10/26 00:12:04 by ngeschwi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,11 @@
 
 void	*ft_check_time_dead(t_philo *philo, unsigned long long time)
 {
+	if (philo->data->time_to_die < philo->data->time_to_eat)
+	{
+		ft_print(philo, "taking a fork", time);
+		return (ft_dead(philo));
+	}
 	if (time - philo->time_when_eat > philo->data->time_to_die)
 		return (ft_dead(philo));
 	pthread_mutex_lock(&(philo->data->mut_die));
@@ -46,7 +51,6 @@ void	*ft_check_when_eat(t_philo *philo, unsigned long long time)
 		pthread_mutex_unlock(&(philo->data->mut_die));
 		ft_un_lock_mutex(philo, 1, EVEN);
 		ft_print(philo, "taking a fork", time);
-		ft_print(philo, "eating", time);
 		return (DEAD);
 	}
 	return (NOT_DEAD);

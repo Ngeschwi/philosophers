@@ -6,7 +6,7 @@
 #    By: ngeschwi <nathan.geschwind@gmail.com>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/02 10:53:12 by ngeschwi          #+#    #+#              #
-#    Updated: 2021/10/19 16:17:25 by ngeschwi         ###   ########.fr        #
+#    Updated: 2021/10/25 23:23:57 by ngeschwi         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,7 +16,8 @@ SRCS = main.c \
 		sources/ft_life_3.c \
 		sources/ft_print.c \
 		sources/ft_error.c \
-		sources/utils/ft_atoi.c
+		sources/utils/ft_atoi.c \
+		sources/utils/ft_memcpy.c
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -34,10 +35,10 @@ LINK	= -Iincludes
 
 all:	$(NAME)
 
-%.o : %.c | $(OBJ_PATH)
-	${CC} ${CFLAGS} ${LINK} -c $< -o objets/$@
+$(OBJ_PATH)/%.o : %.c | $(OBJ_PATH)
+	${CC} ${CFLAGS} ${LINK} -c $< -o $@
 
-$(NAME):	$(OBJS)
+$(NAME):	$(PATH_OBJS)
 	${CC} ${CFLAGS} ${PATH_OBJS} ${LINK} ${LIBS} -o ${NAME}
 
 $(OBJ_PATH) :

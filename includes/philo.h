@@ -6,7 +6,7 @@
 /*   By: ngeschwi <nathan.geschwind@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 10:59:14 by ngeschwi          #+#    #+#             */
-/*   Updated: 2021/10/19 20:55:39 by ngeschwi         ###   ########.fr       */
+/*   Updated: 2021/10/26 00:09:43 by ngeschwi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,11 +44,14 @@ typedef struct s_data
 	int					nbr_time_philo_eat;
 	unsigned long long	time_start;
 	int					die;
+	int					nbr_die;
+	int					print_die;
 	t_philo				*philos;
 	pthread_mutex_t		mut_print;
 	pthread_mutex_t		mut_die;
 }				t_data;
 
+# define MAX_INT 2147483647
 # define ERROR 1
 # define SUCCESS 0
 # define EVEN 1
@@ -56,19 +59,22 @@ typedef struct s_data
 # define NOT_DEAD "not_dead"
 # define DEAD 0
 
-void	*ft_life(void *philo);
-void	*ft_eat(t_philo *philo);
-void	*ft_sleep(t_philo *philo);
-void	*ft_think(t_philo *philo);
-void	*ft_dead(t_philo *philo);
-void	*ft_check_when_eat(t_philo *philo, unsigned long long time);
-void	*ft_check_time_dead(t_philo *philo, unsigned long long time);
-void	ft_un_lock_mutex(t_philo *philo, int check, int who);
-void	*ft_end(t_data *data);
-void	ft_print(t_philo *philo, char *str, unsigned long long time);
-void	ft_print_dead(t_philo *philo, unsigned long long time);
-int		ft_error(char *str);
+void				*ft_life(void *philo);
+void				*ft_eat(t_philo *philo);
+void				*ft_sleep(t_philo *philo);
+void				*ft_think(t_philo *philo);
+void				*ft_dead(t_philo *philo);
+void				*ft_check_when_eat(t_philo *philo, unsigned long long time);
+void				*ft_check_time_dead(t_philo *philo,
+						unsigned long long time);
+void				ft_un_lock_mutex(t_philo *philo, int check, int who);
+void				*ft_end(t_data *data);
+void				ft_print(t_philo *philo, char *str,
+						unsigned long long time);
+void				ft_print_dead(t_philo *philo, unsigned long long time);
+int					ft_error(char *str);
 
-int		ft_atoi(const char *str);
+unsigned long long	ft_atoi(const char *str);
+void				*ft_memcpy(void *dst, const void *src, size_t n);
 
 #endif
