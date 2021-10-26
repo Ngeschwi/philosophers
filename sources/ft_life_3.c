@@ -6,11 +6,29 @@
 /*   By: ngeschwi <nathan.geschwind@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:13:40 by ngeschwi          #+#    #+#             */
-/*   Updated: 2021/10/26 00:12:04 by ngeschwi         ###   ########.fr       */
+/*   Updated: 2021/10/26 16:59:47 by ngeschwi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+static void	*ft_check_other_dead(t_philo *philo)
+{
+	int	i;
+
+	i = 0;
+	usleep(100);
+	while (i < philo->data->nbr_philo)
+	{
+		if (philo->data->philos[i].die_p == 1)
+		{
+			pthread_mutex_unlock(&(philo->data->mut_die));
+			return (DEAD);
+		}
+		i++;
+	}
+	return (NOT_DEAD);
+}
 
 void	*ft_check_time_dead(t_philo *philo, unsigned long long time)
 {
@@ -32,6 +50,8 @@ void	*ft_check_time_dead(t_philo *philo, unsigned long long time)
 		pthread_mutex_unlock(&(philo->data->mut_die));
 		return (ft_dead(philo));
 	}
+	if (ft_check_other_dead(philo) == DEAD)
+		return (DEAD);
 	pthread_mutex_unlock(&(philo->data->mut_die));
 	return (NOT_DEAD);
 }

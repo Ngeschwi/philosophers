@@ -6,7 +6,7 @@
 /*   By: ngeschwi <nathan.geschwind@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/14 17:47:11 by ngeschwi          #+#    #+#             */
-/*   Updated: 2021/10/26 00:00:42 by ngeschwi         ###   ########.fr       */
+/*   Updated: 2021/10/26 16:56:28 by ngeschwi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,10 +99,10 @@ void	*ft_dead(t_philo *philo)
 	unsigned long long	time;
 
 	pthread_mutex_lock(&(philo->data->mut_die));
-	philo->data->die = 1;
-	philo->die_p = 1;
 	time = philo->time_when_eat + philo->data->time_to_die;
 	ft_print_dead(philo, time);
+	philo->data->die = 1;
+	philo->die_p = 1;
 	pthread_mutex_unlock(&(philo->data->mut_die));
 	return (DEAD);
 }

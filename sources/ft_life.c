@@ -6,7 +6,7 @@
 /*   By: ngeschwi <nathan.geschwind@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 10:29:31 by ngeschwi          #+#    #+#             */
-/*   Updated: 2021/10/26 00:03:04 by ngeschwi         ###   ########.fr       */
+/*   Updated: 2021/10/26 17:03:48 by ngeschwi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	ft_end_nbr_eat(t_philo *philo)
 {
 	while (1)
 	{
+		usleep(50);
 		pthread_mutex_lock(&(philo->data->mut_die));
 		if (philo->data->nbr_die == philo->data->nbr_philo)
 		{
@@ -83,10 +84,10 @@ void	*ft_end(t_data *data)
 		if (data->die == 1)
 		{
 			pthread_mutex_unlock(&(data->mut_die));
-			break ;
+			usleep(50);
+			free(data->philos);
+			return (DEAD);
 		}
 		pthread_mutex_unlock(&(data->mut_die));
 	}
-	free(data->philos);
-	return (DEAD);
 }

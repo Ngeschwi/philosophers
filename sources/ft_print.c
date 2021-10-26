@@ -6,7 +6,7 @@
 /*   By: ngeschwi <nathan.geschwind@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/13 20:36:19 by ngeschwi          #+#    #+#             */
-/*   Updated: 2021/10/26 00:11:05 by ngeschwi         ###   ########.fr       */
+/*   Updated: 2021/10/26 16:56:45 by ngeschwi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	ft_print(t_philo *philo, char *str, unsigned long long time)
 {
 	pthread_mutex_lock(&(philo->data->mut_print));
-	printf("%llu Philo %d is %s\n", time, philo->position, str);
 	if (philo->data->print_die == 0)
 	{
+		printf("%llu Philo %d is %s\n", time, philo->position, str);
 		if (str[0] == 't' && str[1] == 'a')
 		{
 			philo->time_when_eat = time;

@@ -6,7 +6,7 @@
 /*   By: ngeschwi <nathan.geschwind@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 11:01:09 by ngeschwi          #+#    #+#             */
-/*   Updated: 2021/10/26 00:09:50 by ngeschwi         ###   ########.fr       */
+/*   Updated: 2021/10/26 16:58:18 by ngeschwi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,12 @@ static int	ft_init_philo(t_data *data)
 	struct timeval	tv;
 
 	i = 0;
-	if (gettimeofday(&tv, NULL) == -1)
-		return (ERROR);
+	gettimeofday(&tv, NULL);
 	data->time_start = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
 	data->philos = malloc(sizeof(t_philo) * data->nbr_philo);
 	while (i < data->nbr_philo)
 	{
+		memset(&(data->philos[i]), 0, sizeof(t_philo));
 		ft_memcpy(&(data->philos[i]), &philo, sizeof(t_philo));
 		data->philos[i].position = i;
 		data->philos[i].eat_count = 0;
@@ -61,9 +61,9 @@ static int	ft_verif_struct(t_data *data)
 {
 	if (data->nbr_philo < 0 || data->time_to_die < 60
 		|| data->time_to_eat < 60 || data->time_to_sleep < 60)
-		return (ft_error("argument error"));
+		return (ft_error("Argument error"));
 	if (data->nbr_philo > 200)
-		return (ft_error("The number of philo cannot exceed 200"));
+		return (ft_error("Argument error"));
 	else
 		return (SUCCESS);
 }
@@ -82,7 +82,7 @@ static int	ft_init_struct(t_data *data, int argc, char **argv)
 	else
 		data->nbr_time_philo_eat = -1;
 	if (argc == 6 && data->nbr_time_philo_eat <= 0)
-		return (ft_error("The number of meals cannot be zero or negative"));
+		return (ft_error("Argument error"));
 	if (ft_verif_struct(data) == ERROR)
 		return (ERROR);
 	pthread_mutex_init(&(data->mut_print), NULL);
@@ -96,9 +96,10 @@ int	main(int argc, char **argv)
 
 	if (argc == 5 || argc == 6)
 	{
+		memset(&data, 0, sizeof(t_data));
 		if (ft_init_struct(&data, argc, argv) == ERROR)
 			return (ERROR);
-		if (ft_init_philo(&data) == ERROR)
+		if (ft_init_philo(&data) == DEAD)
 			return (ERROR);
 	}
 	else
