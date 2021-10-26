@@ -6,7 +6,7 @@
 /*   By: ngeschwi <nathan.geschwind@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/02 11:01:09 by ngeschwi          #+#    #+#             */
-/*   Updated: 2021/10/26 16:58:18 by ngeschwi         ###   ########.fr       */
+/*   Updated: 2021/10/26 17:30:47 by ngeschwi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	ft_init_philo(t_data *data)
 
 static int	ft_verif_struct(t_data *data)
 {
-	if (data->nbr_philo < 0 || data->time_to_die < 60
+	if (data->nbr_philo <= 0 || data->time_to_die < 60
 		|| data->time_to_eat < 60 || data->time_to_sleep < 60)
 		return (ft_error("Argument error"));
 	if (data->nbr_philo > 200)

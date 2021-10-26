@@ -6,7 +6,7 @@
 /*   By: ngeschwi <nathan.geschwind@gmail.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/06 10:29:31 by ngeschwi          #+#    #+#             */
-/*   Updated: 2021/10/26 17:03:48 by ngeschwi         ###   ########.fr       */
+/*   Updated: 2021/10/26 17:18:50 by ngeschwi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ void	*ft_end(t_data *data)
 		if (data->die == 1)
 		{
 			pthread_mutex_unlock(&(data->mut_die));
-			usleep(50);
 			free(data->philos);
 			return (DEAD);
 		}
